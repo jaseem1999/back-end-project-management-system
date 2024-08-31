@@ -25,4 +25,27 @@ public class TeamMemberService {
 	public List<TeamMember> getTeamByPM(ProjectManagerDTO pmdto) {
 		return tmr.findByPm(pmdto);
 	}
+	
+	public String statusUpdatedBlock(long teamId) {
+		TeamMember team =tmr.findById(teamId).orElse(null);
+		
+		if(team != null) {
+			team.setStatus("block");
+			tmr.save(team);
+			return "success";
+		}
+		
+		return null;
+	}
+	public String statusUpdatedunblock(long teamId) {
+		TeamMember team =tmr.findById(teamId).orElse(null);
+		
+		if(team != null) {
+			team.setStatus(null);
+			tmr.save(team);
+			return "success";
+		}
+		
+		return null;
+	}
 }
